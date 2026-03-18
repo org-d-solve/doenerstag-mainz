@@ -480,7 +480,7 @@ async function fetchMenuFromSheets() {
   if (!rows || rows.length === 0) throw new Error('Empty sheet');
 
   return rows
-    .filter(row => row.c && row.c[0] && row.c[0].v) // skip empty rows
+    .filter(row => row.c && row.c[0] && row.c[0].v && !isNaN(parseFloat(row.c[2]?.v))) // skip empty rows and header row
     .map(row => ({
       kategorie: (row.c[0]?.v ?? '').toString().trim(),
       gericht:   (row.c[1]?.v ?? '').toString().trim(),
