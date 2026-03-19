@@ -19,6 +19,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Prevent flash of wrong theme/language -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+      var l = localStorage.getItem('lang') || 'de';
+      document.documentElement.lang = l;
+    })();
+  </script>
 </head>
 
 <body>
@@ -34,14 +44,18 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#speisekarte" class="nav-link">Speisekarte</a></li>
-        <li><a href="#spezial" class="nav-link">Aktionstage</a></li>
-        <li><a href="#oeffnungszeiten" class="nav-link">Öffnungszeiten</a></li>
-        <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
+        <li><a href="#speisekarte" class="nav-link" data-i18n="nav.menu">Speisekarte</a></li>
+        <li><a href="#spezial" class="nav-link" data-i18n="nav.specials">Aktionstage</a></li>
+        <li><a href="#oeffnungszeiten" class="nav-link" data-i18n="nav.hours">Öffnungszeiten</a></li>
+        <li><a href="#kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a></li>
         <li>
-          <a href="tel:+4961312165510" class="nav-cta" aria-label="Jetzt anrufen: 06131 2165510">
+          <a href="tel:+4961312165510" class="nav-cta" data-i18n="nav.call" aria-label="Jetzt anrufen: 06131 2165510">
             📞 Anrufen
           </a>
+        </li>
+        <li class="nav-controls">
+          <button class="theme-toggle" id="themeToggle" aria-label="Theme wechseln">☀️</button>
+          <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">EN</button>
         </li>
       </ul>
     </div>
@@ -62,12 +76,14 @@
       </div>
 
       <div class="hero-actions">
-        <a href="#speisekarte" class="btn btn-primary">Zur Speisekarte</a>
+        <a href="#speisekarte" class="btn btn-primary" data-i18n="hero.menuBtn">Zur Speisekarte</a>
         <a
           href="https://www.google.com/maps/dir/?api=1&destination=Kaiser-Wilhelm-Ring+39,+55118+Mainz&travelmode=driving"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-secondary"
+          data-i18n="hero.routeBtn"
+          data-i18n-aria="hero.routeAria"
           aria-label="Navigation zu Dönerstag starten (öffnet Google Maps)"
         >
           📍 Route starten
@@ -85,29 +101,29 @@
   <!-- ===== AKTIONSTAGE ===== -->
   <section id="spezial" class="section spezial" aria-labelledby="spezialHeading">
     <div class="container">
-      <h2 class="section-title" id="spezialHeading">Unsere Aktionstage</h2>
-      <p class="section-subtitle">An diesen Tagen gibt es bei uns etwas Besonderes!</p>
+      <h2 class="section-title" id="spezialHeading" data-i18n="specials.heading">Unsere Aktionstage</h2>
+      <p class="section-subtitle" data-i18n="specials.subtitle">An diesen Tagen gibt es bei uns etwas Besonderes!</p>
 
       <div class="spezial-grid">
         <div class="spezial-card" data-day="1">
           <div class="spezial-emoji" aria-hidden="true">🧆</div>
-          <h3>Montag</h3>
-          <p class="spezial-name">Falafel-Tag</p>
-          <p class="spezial-desc">Frisch zubereitete Falafel – knusprig, würzig, 100 % vegan.</p>
+          <h3 data-i18n="specials.monday">Montag</h3>
+          <p class="spezial-name" data-i18n="specials.falafelName">Falafel-Tag</p>
+          <p class="spezial-desc" data-i18n="specials.falafelDesc">Frisch zubereitete Falafel – knusprig, würzig, 100 % vegan.</p>
         </div>
 
         <div class="spezial-card spezial-card--highlight" data-day="4">
           <div class="spezial-emoji" aria-hidden="true">🥙</div>
-          <h3>Donnerstag</h3>
-          <p class="spezial-name">Dönerstag!</p>
-          <p class="spezial-desc">Der echte Dönerstag: saftiger Döner mit eiskalter Cola – das Original.</p>
+          <h3 data-i18n="specials.thursday">Donnerstag</h3>
+          <p class="spezial-name" data-i18n="specials.doenerName">Dönerstag!</p>
+          <p class="spezial-desc" data-i18n="specials.doenerDesc">Der echte Dönerstag: saftiger Döner mit eiskalter Cola – das Original.</p>
         </div>
 
         <div class="spezial-card" data-day="3">
           <div class="spezial-emoji" aria-hidden="true">🍕</div>
-          <h3>Mittwoch</h3>
-          <p class="spezial-name">Pizza-Aktionstag</p>
-          <p class="spezial-desc">Jeden Mittwoch gibt es unsere hausgemachte Pizza zu Aktionspreisen!</p>
+          <h3 data-i18n="specials.wednesday">Mittwoch</h3>
+          <p class="spezial-name" data-i18n="specials.pizzaName">Pizza-Aktionstag</p>
+          <p class="spezial-desc" data-i18n="specials.pizzaDesc">Jeden Mittwoch gibt es unsere hausgemachte Pizza zu Aktionspreisen!</p>
         </div>
       </div>
     </div>
@@ -116,18 +132,18 @@
   <!-- ===== SPEISEKARTE ===== -->
   <section id="speisekarte" class="section speisekarte" aria-labelledby="speisekarteHeading">
     <div class="container">
-      <h2 class="section-title" id="speisekarteHeading">Speisekarte</h2>
-      <p class="section-subtitle">Frisch zubereitet – täglich für dich</p>
+      <h2 class="section-title" id="speisekarteHeading" data-i18n="menu.heading">Speisekarte</h2>
+      <p class="section-subtitle" data-i18n="menu.subtitle">Frisch zubereitet – täglich für dich</p>
 
       <!-- Filter buttons -->
       <div class="filter-bar" id="filterBar" role="tablist" aria-label="Menükategorie wählen">
-        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Alle</button>
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" data-i18n="menu.all">Alle</button>
       </div>
 
       <!-- Loading state -->
       <div class="menu-loading" id="menuLoading" aria-live="polite" aria-label="Speisekarte wird geladen">
         <div class="spinner" aria-hidden="true"></div>
-        <p>Speisekarte wird geladen…</p>
+        <p data-i18n="menu.loading">Speisekarte wird geladen…</p>
       </div>
 
       <!-- Menu grid -->
@@ -135,12 +151,12 @@
 
       <!-- Error state -->
       <div class="menu-error hidden" id="menuError" role="alert">
-        <p>⚠️ Speisekarte konnte nicht geladen werden. Bitte ruf uns an oder schau direkt bei uns vorbei!</p>
+        <p data-i18n="menu.error">⚠️ Speisekarte konnte nicht geladen werden. Bitte ruf uns an oder schau direkt bei uns vorbei!</p>
       </div>
 
       <!-- Price warning (shown when live prices could not be loaded) -->
       <div class="menu-price-warning hidden" id="menuPriceWarning" role="alert">
-        <p>⚠️ Die aktuellen Preise konnten nicht geladen werden. Die angezeigten Preise und Produkte sind Platzhalter – bitte frag direkt bei uns nach.</p>
+        <p data-i18n="menu.priceWarning">⚠️ Die aktuellen Preise konnten nicht geladen werden. Die angezeigten Preise und Produkte sind Platzhalter – bitte frag direkt bei uns nach.</p>
       </div>
     </div>
   </section>
@@ -148,8 +164,8 @@
   <!-- ===== ÖFFNUNGSZEITEN ===== -->
   <section id="oeffnungszeiten" class="section oeffnungszeiten" aria-labelledby="hoursHeading">
     <div class="container">
-      <h2 class="section-title" id="hoursHeading">Öffnungszeiten</h2>
-      <p class="section-subtitle">Wir sind fast immer für dich da</p>
+      <h2 class="section-title" id="hoursHeading" data-i18n="hours.heading">Öffnungszeiten</h2>
+      <p class="section-subtitle" data-i18n="hours.subtitle">Wir sind fast immer für dich da</p>
 
       <div class="hours-card">
         <table class="hours-table" aria-label="Öffnungszeiten">
@@ -175,7 +191,7 @@
         <div class="hours-status" id="hoursStatus" aria-live="polite"></div>
 
         <div class="menu-price-warning hidden" id="hoursWarning" role="alert">
-          <p>⚠️ Die aktuellen Öffnungszeiten konnten nicht geladen werden. Bitte ruf uns an: <a href="tel:+4961312165510">06131 2165510</a></p>
+          <p><span data-i18n="hours.warning">⚠️ Die aktuellen Öffnungszeiten konnten nicht geladen werden. Bitte ruf uns an:</span> <a href="tel:+4961312165510">06131 2165510</a></p>
         </div>
       </div>
     </div>
@@ -184,15 +200,15 @@
   <!-- ===== KONTAKT ===== -->
   <section id="kontakt" class="section kontakt" aria-labelledby="kontaktHeading">
     <div class="container">
-      <h2 class="section-title" id="kontaktHeading">Kontakt &amp; Anfahrt</h2>
-      <p class="section-subtitle">Wir freuen uns auf deinen Besuch</p>
+      <h2 class="section-title" id="kontaktHeading" data-i18n="contact.heading">Kontakt &amp; Anfahrt</h2>
+      <p class="section-subtitle" data-i18n="contact.subtitle">Wir freuen uns auf deinen Besuch</p>
 
       <div class="kontakt-grid">
         <div class="kontakt-info">
           <div class="kontakt-item">
             <span class="kontakt-icon" aria-hidden="true">📍</span>
             <div>
-              <strong>Adresse</strong>
+              <strong data-i18n="contact.address">Adresse</strong>
               <address>
                 Dönerstag<br />
                 Kaiser-Wilhelm-Ring 39<br />
@@ -204,7 +220,7 @@
           <div class="kontakt-item">
             <span class="kontakt-icon" aria-hidden="true">📞</span>
             <div>
-              <strong>Telefon</strong>
+              <strong data-i18n="contact.phone">Telefon</strong>
               <a href="tel:+4961312165510" class="phone-link" aria-label="Anrufen: 06131 2165510">
                 06131 2165510
               </a>
@@ -214,7 +230,7 @@
           <div class="kontakt-item">
             <span class="kontakt-icon" aria-hidden="true">🕐</span>
             <div>
-              <strong>Heute</strong>
+              <strong data-i18n="contact.today">Heute</strong>
               <p id="todayHours"></p>
             </div>
           </div>
@@ -224,6 +240,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary maps-btn"
+            data-i18n="contact.navBtn"
+            data-i18n-aria="contact.navAria"
             aria-label="Google Maps Navigation zu Dönerstag Mainz starten"
           >
             🗺️ Navigation starten
@@ -258,17 +276,17 @@
         </div>
 
         <div class="footer-links">
-          <h3>Rechtliches</h3>
+          <h3 data-i18n="footer.legal">Rechtliches</h3>
           <ul role="list">
-            <li><button class="footer-link-btn" id="openImpressum" aria-haspopup="dialog">Impressum</button></li>
-            <li><button class="footer-link-btn" id="openDatenschutz" aria-haspopup="dialog">Datenschutzerklärung</button></li>
+            <li><button class="footer-link-btn" id="openImpressum" aria-haspopup="dialog" data-i18n="footer.impressum">Impressum</button></li>
+            <li><button class="footer-link-btn" id="openDatenschutz" aria-haspopup="dialog" data-i18n="footer.datenschutz">Datenschutzerklärung</button></li>
           </ul>
         </div>
 
       </div>
 
       <div class="footer-bottom">
-        <p id="footerCopyright" class="footer-copyright-clickable" tabindex="0" role="button">© <span id="footerYear"></span> Dönerstag Mainz. Alle Rechte vorbehalten.</p>
+        <p id="footerCopyright" class="footer-copyright-clickable" tabindex="0" role="button">© <span id="footerYear"></span> Dönerstag Mainz. <span data-i18n="footer.copyright">Alle Rechte vorbehalten.</span></p>
       </div>
     </div>
   </footer>

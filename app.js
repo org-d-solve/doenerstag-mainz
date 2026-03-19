@@ -94,10 +94,234 @@ const FALLBACK_OPENING_HOURS = {
 };
 
 // =============================================
+// Translations (i18n)
+// =============================================
+
+const TRANSLATIONS = {
+  de: {
+    'nav.menu': 'Speisekarte',
+    'nav.specials': 'Aktionstage',
+    'nav.hours': 'Öffnungszeiten',
+    'nav.contact': 'Kontakt',
+    'nav.call': '📞 Anrufen',
+    'hero.title': 'Dönerstag Mainz',
+    'hero.subtitle': 'Frischer Döner · Knusprige Pizza · Vegane Falafel',
+    'hero.menuBtn': 'Zur Speisekarte',
+    'hero.routeBtn': '📍 Route starten',
+    'hero.routeAria': 'Navigation zu Dönerstag starten (öffnet Google Maps)',
+    'hero.badge.1': '🧆 Montag – Falafel-Tag!',
+    'hero.title.1': 'Falafel-Tag!',
+    'hero.subtitle.1': 'Knusprige Falafel – frisch, würzig, 100 % vegan',
+    'hero.badge.3': '🍕 Mittwoch – Pizza-Aktionstag!',
+    'hero.title.3': 'Pizza-Aktionstag!',
+    'hero.subtitle.3': 'Jeden Mittwoch – hausgemachte Pizza zu Aktionspreisen',
+    'hero.badge.4': '🥙 Es ist DÖNERSTAG!',
+    'hero.title.4': 'Dönerstag!',
+    'hero.subtitle.4': 'Saftiger Döner mit eiskalter Cola – das Original',
+    'hero.badge.default': '🌟 Guten',
+    'specials.heading': 'Unsere Aktionstage',
+    'specials.subtitle': 'An diesen Tagen gibt es bei uns etwas Besonderes!',
+    'specials.monday': 'Montag',
+    'specials.wednesday': 'Mittwoch',
+    'specials.thursday': 'Donnerstag',
+    'specials.falafelName': 'Falafel-Tag',
+    'specials.falafelDesc': 'Frisch zubereitete Falafel – knusprig, würzig, 100 % vegan.',
+    'specials.doenerName': 'Dönerstag!',
+    'specials.doenerDesc': 'Der echte Dönerstag: saftiger Döner mit eiskalter Cola – das Original.',
+    'specials.pizzaName': 'Pizza-Aktionstag',
+    'specials.pizzaDesc': 'Jeden Mittwoch gibt es unsere hausgemachte Pizza zu Aktionspreisen!',
+    'specials.todayBadge': '🔥 Heute!',
+    'menu.heading': 'Speisekarte',
+    'menu.subtitle': 'Frisch zubereitet – täglich für dich',
+    'menu.all': 'Alle',
+    'menu.loading': 'Speisekarte wird geladen…',
+    'menu.error': '⚠️ Speisekarte konnte nicht geladen werden. Bitte ruf uns an oder schau direkt bei uns vorbei!',
+    'menu.priceWarning': '⚠️ Die aktuellen Preise konnten nicht geladen werden. Die angezeigten Preise und Produkte sind Platzhalter – bitte frag direkt bei uns nach.',
+    'menu.noEntries': 'Keine Einträge gefunden.',
+    'hours.heading': 'Öffnungszeiten',
+    'hours.subtitle': 'Wir sind fast immer für dich da',
+    'hours.closed': 'Geschlossen',
+    'hours.openNow': 'Jetzt geöffnet – bis',
+    'hours.closedNow': 'Aktuell geschlossen – öffnet um',
+    'hours.closedGeneral': 'Aktuell geschlossen',
+    'hours.uhr': 'Uhr',
+    'hours.warning': '⚠️ Die aktuellen Öffnungszeiten konnten nicht geladen werden. Bitte ruf uns an:',
+    'hours.callForHours': 'Bitte ruf uns an für aktuelle Öffnungszeiten.',
+    'hours.todayOpen': 'geöffnet',
+    'hours.todayClosed': 'geschlossen',
+    'contact.heading': 'Kontakt & Anfahrt',
+    'contact.subtitle': 'Wir freuen uns auf deinen Besuch',
+    'contact.address': 'Adresse',
+    'contact.phone': 'Telefon',
+    'contact.today': 'Heute',
+    'contact.navBtn': '🗺️ Navigation starten',
+    'contact.navAria': 'Google Maps Navigation zu Dönerstag Mainz starten',
+    'footer.legal': 'Rechtliches',
+    'footer.impressum': 'Impressum',
+    'footer.datenschutz': 'Datenschutzerklärung',
+    'footer.copyright': 'Alle Rechte vorbehalten.',
+    'day.0': 'Sonntag', 'day.1': 'Montag', 'day.2': 'Dienstag', 'day.3': 'Mittwoch',
+    'day.4': 'Donnerstag', 'day.5': 'Freitag', 'day.6': 'Samstag',
+  },
+  en: {
+    'nav.menu': 'Menu',
+    'nav.specials': 'Special Days',
+    'nav.hours': 'Opening Hours',
+    'nav.contact': 'Contact',
+    'nav.call': '📞 Call Us',
+    'hero.title': 'Dönerstag Mainz',
+    'hero.subtitle': 'Fresh Döner · Crispy Pizza · Vegan Falafel',
+    'hero.menuBtn': 'View Menu',
+    'hero.routeBtn': '📍 Get Directions',
+    'hero.routeAria': 'Navigate to Dönerstag (opens Google Maps)',
+    'hero.badge.1': '🧆 Monday – Falafel Day!',
+    'hero.title.1': 'Falafel Day!',
+    'hero.subtitle.1': 'Crispy falafel – fresh, spicy, 100% vegan',
+    'hero.badge.3': '🍕 Wednesday – Pizza Special!',
+    'hero.title.3': 'Pizza Special!',
+    'hero.subtitle.3': 'Every Wednesday – homemade pizza at special prices',
+    'hero.badge.4': '🥙 It\'s DÖNERSTAG!',
+    'hero.title.4': 'Dönerstag!',
+    'hero.subtitle.4': 'Juicy döner with ice-cold cola – the original',
+    'hero.badge.default': '🌟 Happy',
+    'specials.heading': 'Our Special Days',
+    'specials.subtitle': 'On these days we have something special for you!',
+    'specials.monday': 'Monday',
+    'specials.wednesday': 'Wednesday',
+    'specials.thursday': 'Thursday',
+    'specials.falafelName': 'Falafel Day',
+    'specials.falafelDesc': 'Freshly prepared falafel – crispy, spicy, 100% vegan.',
+    'specials.doenerName': 'Dönerstag!',
+    'specials.doenerDesc': 'The real Döner Thursday: juicy döner with ice-cold cola – the original.',
+    'specials.pizzaName': 'Pizza Special Day',
+    'specials.pizzaDesc': 'Every Wednesday – our homemade pizza at special prices!',
+    'specials.todayBadge': '🔥 Today!',
+    'menu.heading': 'Menu',
+    'menu.subtitle': 'Freshly prepared – daily for you',
+    'menu.all': 'All',
+    'menu.loading': 'Loading menu…',
+    'menu.error': '⚠️ Menu could not be loaded. Please call us or visit us directly!',
+    'menu.priceWarning': '⚠️ Current prices could not be loaded. Displayed prices and products are placeholders – please ask us directly.',
+    'menu.noEntries': 'No entries found.',
+    'hours.heading': 'Opening Hours',
+    'hours.subtitle': 'We\'re almost always here for you',
+    'hours.closed': 'Closed',
+    'hours.openNow': 'Open now – until',
+    'hours.closedNow': 'Currently closed – opens at',
+    'hours.closedGeneral': 'Currently closed',
+    'hours.uhr': '',
+    'hours.warning': '⚠️ Current opening hours could not be loaded. Please call us:',
+    'hours.callForHours': 'Please call us for current opening hours.',
+    'hours.todayOpen': 'open',
+    'hours.todayClosed': 'closed',
+    'contact.heading': 'Contact & Directions',
+    'contact.subtitle': 'We look forward to your visit',
+    'contact.address': 'Address',
+    'contact.phone': 'Phone',
+    'contact.today': 'Today',
+    'contact.navBtn': '🗺️ Start Navigation',
+    'contact.navAria': 'Start Google Maps navigation to Dönerstag Mainz',
+    'footer.legal': 'Legal',
+    'footer.impressum': 'Legal Notice',
+    'footer.datenschutz': 'Privacy Policy',
+    'footer.copyright': 'All rights reserved.',
+    'day.0': 'Sunday', 'day.1': 'Monday', 'day.2': 'Tuesday', 'day.3': 'Wednesday',
+    'day.4': 'Thursday', 'day.5': 'Friday', 'day.6': 'Saturday',
+  }
+};
+
+let currentLang = 'de';
+let _lastOpeningHours = null;
+
+function t(key) {
+  return TRANSLATIONS[currentLang]?.[key] ?? TRANSLATIONS['de']?.[key] ?? key;
+}
+
+// =============================================
+// i18n
+// =============================================
+
+function initLanguage() {
+  currentLang = localStorage.getItem('lang') || 'de';
+  setLanguage(currentLang, true);
+
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      setLanguage(currentLang === 'de' ? 'en' : 'de');
+    });
+  }
+}
+
+function setLanguage(lang, isInitial) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+
+  // Static data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+  });
+
+  // Toggle button label
+  const langBtn = document.getElementById('langToggle');
+  if (langBtn) langBtn.textContent = lang === 'de' ? 'EN' : 'DE';
+
+  // CSS variable for today badge
+  document.documentElement.style.setProperty('--today-badge', `'${t('specials.todayBadge')}'`);
+
+  // Update theme toggle aria
+  updateThemeButton();
+
+  if (!isInitial) {
+    initHeroAnimation();
+    if (_lastOpeningHours) {
+      renderHoursTable(_lastOpeningHours);
+      renderHoursStatus(_lastOpeningHours);
+    }
+  }
+}
+
+// =============================================
+// Theme
+// =============================================
+
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  setTheme(saved || 'dark');
+
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  updateThemeButton();
+}
+
+function updateThemeButton() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+  btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+// =============================================
 // DOM Ready
 // =============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initLanguage();
   initYear();
   initNavbar();
   initMobileNav();
@@ -227,13 +451,15 @@ function initHeroAnimation() {
   const stage    = document.getElementById('animationStage');
 
   if (cfg) {
-    if (badge)    badge.textContent = cfg.badge;
-    if (title)    title.textContent = cfg.title;
-    if (subtitle) subtitle.textContent = cfg.subtitle;
+    if (badge)    badge.textContent = t('hero.badge.' + day);
+    if (title)    title.textContent = t('hero.title.' + day);
+    if (subtitle) subtitle.textContent = t('hero.subtitle.' + day);
     if (stage)    stage.innerHTML = cfg.animation();
   } else {
-    // Default – generic döner day
-    if (badge)    badge.textContent = `🌟 Guten ${DAY_NAMES_DE[day]}!`;
+    // Default – generic day
+    if (badge)    badge.textContent = `${t('hero.badge.default')} ${t('day.' + day)}!`;
+    if (title)    title.textContent = t('hero.title');
+    if (subtitle) subtitle.textContent = t('hero.subtitle');
     if (stage)    stage.innerHTML = buildDefaultAnimation();
   }
 }
@@ -386,10 +612,11 @@ async function initHoursStatus() {
     // Show fallback message in Kontakt section
     const todayEl = document.getElementById('todayHours');
     if (todayEl) {
-      todayEl.textContent = 'Bitte ruf uns an für aktuelle Öffnungszeiten.';
+      todayEl.textContent = t('hours.callForHours');
       todayEl.style.color = 'var(--text-muted)';
     }
   } else {
+    _lastOpeningHours = openingHours;
     renderHoursTable(openingHours);
     renderHoursStatus(openingHours);
   }
@@ -466,12 +693,13 @@ function renderHoursTable(openingHours) {
     tr.setAttribute('data-days', String(dayIndex));
     if (dayIndex === today) tr.classList.add('today');
 
+    const uhr = t('hours.uhr');
     const timeText = (slots && slots.length > 0)
-      ? slots.map(([o, c]) => `${fmtHour(o)} – ${fmtHour(c)} Uhr`).join(' / ')
-      : 'Geschlossen';
+      ? slots.map(([o, c]) => `${fmtHour(o)} – ${fmtHour(c)}${uhr ? ' ' + uhr : ''}`).join(' / ')
+      : t('hours.closed');
 
     tr.innerHTML = `
-      <td class="hours-day">${DAY_NAMES_DE[dayIndex]}</td>
+      <td class="hours-day">${t('day.' + dayIndex)}</td>
       <td class="hours-time">${timeText}</td>
       <td class="hours-note"></td>`;
 
@@ -497,23 +725,25 @@ function renderHoursStatus(openingHours) {
 
   if (statusEl) {
     statusEl.className = `hours-status ${isOpen ? 'open' : 'closed'}`;
+    const uhr = t('hours.uhr');
     if (isOpen) {
-      statusEl.textContent = `✅ Jetzt geöffnet – bis ${fmtHour(currentSlot[1])} Uhr`;
+      statusEl.textContent = `✅ ${t('hours.openNow')} ${fmtHour(currentSlot[1])}${uhr ? ' ' + uhr : ''}`;
     } else {
       const nextSlot = slots.find(([open]) => adjustedHour < open);
       if (nextSlot) {
-        statusEl.textContent = `❌ Aktuell geschlossen – öffnet um ${fmtHour(nextSlot[0])} Uhr`;
+        statusEl.textContent = `❌ ${t('hours.closedNow')} ${fmtHour(nextSlot[0])}${uhr ? ' ' + uhr : ''}`;
       } else {
-        statusEl.textContent = '❌ Aktuell geschlossen';
+        statusEl.textContent = `❌ ${t('hours.closedGeneral')}`;
       }
     }
   }
 
   if (todayEl) {
+    const uhr = t('hours.uhr');
     const slotsText = slots.length > 0
-      ? slots.map(([o, c]) => `${fmtHour(o)} – ${fmtHour(c)} Uhr`).join(', ')
-      : 'Aktuell ';
-    todayEl.textContent = `${slotsText} ${isOpen ? 'geöffnet' : 'geschlossen'}`;
+      ? slots.map(([o, c]) => `${fmtHour(o)} – ${fmtHour(c)}${uhr ? ' ' + uhr : ''}`).join(', ')
+      : '';
+    todayEl.textContent = `${slotsText} ${isOpen ? t('hours.todayOpen') : t('hours.todayClosed')}`;
     todayEl.style.color = isOpen ? '#4ecdc4' : 'var(--primary)';
   }
 }
@@ -664,7 +894,7 @@ function renderMenuItems(grid, filter) {
     : allMenuItems.filter(i => i.kategorie === filter);
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">Keine Einträge gefunden.</p>';
+    grid.innerHTML = `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">${t('menu.noEntries')}</p>`;
     return;
   }
 
@@ -718,7 +948,8 @@ function categoryEmoji(kategorie) {
 
 function formatPrice(price) {
   if (!price && price !== 0) return '';
-  return Number(price).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+  const locale = currentLang === 'en' ? 'en-US' : 'de-DE';
+  return Number(price).toLocaleString(locale, { style: 'currency', currency: 'EUR' });
 }
 
 function escapeHtml(str) {
