@@ -112,6 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function initYear() {
   const el = document.getElementById('footerYear');
   if (el) el.textContent = new Date().getFullYear();
+  const copyright = document.getElementById('footerCopyright');
+  if (copyright) {
+    const url = copyright.dataset.url;
+    const open = () => window.open(url, '_blank', 'noopener,noreferrer');
+    copyright.addEventListener('click', open);
+    copyright.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  }
 }
 
 // =============================================
