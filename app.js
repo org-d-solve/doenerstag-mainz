@@ -321,11 +321,29 @@ function initParticles() {
 // =============================================
 
 /**
- * Formats a fractional hour (possibly > 24 for cross-midnight) as HH:00.
- * e.g., 25 → "01:00", 3 → "03:00"
+ * Parses a time value from a Google Sheet cell into a fractional hour number.
+ * Accepts "HH:MM" strings (e.g. "11:30" → 11.5, "11:15" → 11.25) as well as
+ * plain numeric strings or numbers (e.g. "11" or 11 → 11).
+ */
+function parseTimeStr(val) {
+  const str = String(val ?? '').trim();
+  if (str.includes(':')) {
+    const [hPart, mPart] = str.split(':');
+    return parseInt(hPart, 10) + parseInt(mPart, 10) / 60;
+  }
+  return parseFloat(str) || 0;
+}
+
+/**
+ * Formats a fractional hour (possibly > 24 for cross-midnight) as HH:MM.
+ * e.g., 11.5 → "11:30", 11.25 → "11:15", 25.5 → "01:30", 3 → "03:00"
  */
 function fmtHour(h) {
-  return String(h > 24 ? h - 24 : h).padStart(2, '0') + ':00';
+  const normalized   = h > 24 ? h - 24 : h;
+  const totalMinutes = Math.round(normalized * 60);
+  const hours        = Math.floor(totalMinutes / 60);
+  const minutes      = totalMinutes % 60;
+  return String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
 }
 
 async function initHoursStatus() {
@@ -341,7 +359,8 @@ async function initHoursStatus() {
 
 /**
  * Fetches opening hours from the "opening-hours" sheet tab.
- * Expected columns: day (mo/di/mi/do/fr/sa/so), open (hour), close (hour).
+ * Expected columns: day (mo/di/mi/do/fr/sa/so), open (HH:MM), close (HH:MM).
+ * Times may be plain integers ("11") or "HH:MM" strings ("11:30").
  * A day may have multiple rows (e.g., for a midday break).
  * If close < open the closing time wraps past midnight (close += 24).
  * Returns: { dayIndex: [[openHour, closeHour], …] }
@@ -365,9 +384,9 @@ async function fetchOpeningHoursFromSheets() {
       const dayIndex = DAY_ABBR_TO_INDEX[dayStr];
       if (dayIndex === undefined) return;
 
-      const open  = parseFloat(row.c[1]?.v ?? 0);
-      let   close = parseFloat(row.c[2]?.v ?? 0);
-      // Wrap-around: e.g., open=10, close=3 → close becomes 27
+      const open  = parseTimeStr(row.c[1]?.v ?? 0);
+      let   close = parseTimeStr(row.c[2]?.v ?? 0);
+      // Wrap-around: e.g., open=10:00, close=03:00 → close becomes 27
       if (close < open) close += 24;
 
       if (!hours[dayIndex]) hours[dayIndex] = [];
