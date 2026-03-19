@@ -327,11 +327,19 @@ function initParticles() {
  */
 function parseTimeStr(val) {
   const str = String(val ?? '').trim();
-  if (str.includes(':')) {
-    const [hPart, mPart] = str.split(':');
-    return parseInt(hPart, 10) + parseInt(mPart, 10) / 60;
+  if (!str) return NaN;
+  // "HH:MM", "HH:MM:SS", "H:MM AM/PM" – covers both plain text and gviz formatted times
+  const m = str.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?$/i);
+  if (m) {
+    let h = parseInt(m[1], 10);
+    const mins = parseInt(m[2], 10);
+    const ampm = m[3]?.toUpperCase();
+    if (ampm === 'PM' && h !== 12) h += 12;
+    if (ampm === 'AM' && h === 12) h = 0;
+    return h + mins / 60;
   }
-  return parseFloat(str) || 0;
+  const n = parseFloat(str);
+  return isNaN(n) ? NaN : n;
 }
 
 /**
@@ -384,8 +392,9 @@ async function fetchOpeningHoursFromSheets() {
       const dayIndex = DAY_ABBR_TO_INDEX[dayStr];
       if (dayIndex === undefined) return;
 
-      const open  = parseTimeStr(row.c[1]?.v ?? 0);
-      let   close = parseTimeStr(row.c[2]?.v ?? 0);
+      const open  = parseTimeStr(row.c[1]?.f ?? row.c[1]?.v);
+      let   close = parseTimeStr(row.c[2]?.f ?? row.c[2]?.v);
+      if (isNaN(open) || isNaN(close)) return;
       // Wrap-around: e.g., open=10:00, close=03:00 → close becomes 27
       if (close < open) close += 24;
 
@@ -485,10 +494,10 @@ function initFooterHours() {
   const groups   = [];
   let i = 0;
   while (i < dayOrder.length) {
-    const [open, close] = OPENING_HOURS[dayOrder[i]] || [10, 25];
+    const [open, close] = FALLBACK_OPENING_HOURS[dayOrder[i]] || [10, 25];
     let j = i + 1;
     while (j < dayOrder.length) {
-      const [o2, c2] = OPENING_HOURS[dayOrder[j]] || [10, 25];
+      const [o2, c2] = FALLBACK_OPENING_HOURS[dayOrder[j]] || [10, 25];
       if (o2 === open && c2 === close) j++;
       else break;
     }
