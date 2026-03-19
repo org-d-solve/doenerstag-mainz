@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeroAnimation();
   initHoursStatus();
+  initFooterHours();
   initMenuLoader();
   initModals();
   initParticles();
@@ -433,6 +434,41 @@ function renderHoursStatus(openingHours) {
     todayEl.textContent = `${slotsText} (${isOpen ? 'geöffnet' : 'geschlossen'})`;
     todayEl.style.color = isOpen ? '#4ecdc4' : 'var(--primary)';
   }
+}
+
+// =============================================
+// Footer – dynamic opening hours
+// =============================================
+
+function initFooterHours() {
+  const container = document.getElementById('footerHoursList');
+  if (!container) return;
+
+  const DAY_ABBR = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+  const fmtHour  = h => String(h >= 24 ? h - 24 : h).padStart(2, '0') + ':00';
+
+  // Iterate days Mon–Sun (1..6, 0), group consecutive days with identical hours
+  const dayOrder = [1, 2, 3, 4, 5, 6, 0];
+  const groups   = [];
+  let i = 0;
+  while (i < dayOrder.length) {
+    const [open, close] = OPENING_HOURS[dayOrder[i]] || [10, 25];
+    let j = i + 1;
+    while (j < dayOrder.length) {
+      const [o2, c2] = OPENING_HOURS[dayOrder[j]] || [10, 25];
+      if (o2 === open && c2 === close) j++;
+      else break;
+    }
+    groups.push({ days: dayOrder.slice(i, j), open, close });
+    i = j;
+  }
+
+  container.innerHTML = groups.map(g => {
+    const label = g.days.length === 1
+      ? DAY_ABBR[g.days[0]]
+      : `${DAY_ABBR[g.days[0]]} \u2013 ${DAY_ABBR[g.days[g.days.length - 1]]}`;
+    return `<p>${label}: ${fmtHour(g.open)} \u2013 ${fmtHour(g.close)} Uhr</p>`;
+  }).join('');
 }
 
 // =============================================
