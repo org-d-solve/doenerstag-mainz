@@ -29,42 +29,49 @@ const GVIZ_NEWS_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz
  */
 const FALLBACK_MENU = [
   // Döner / Kebab
-  { kategorie: 'Döner & Kebab', gericht: 'Döner Kebab (Brot)',       preis: 100, bildUrl: '' },
-  { kategorie: 'Döner & Kebab', gericht: 'Döner Kebab (Dürüm)',      preis: 100, bildUrl: '' },
-  { kategorie: 'Döner & Kebab', gericht: 'Döner Teller',             preis: 100, bildUrl: '' },
-  { kategorie: 'Döner & Kebab', gericht: 'Döner a la Turka',         preis: 100, bildUrl: '' },
-  { kategorie: 'Döner & Kebab', gericht: 'Yufka Döner',              preis: 100, bildUrl: '' },
-  { kategorie: 'Döner & Kebab', gericht: 'Veganer Dürüm (Halloumi)', preis: 100, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Döner Kebab (Brot)',       preis: null, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Döner Kebab (Dürüm)',      preis: null, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Döner Teller',             preis: null, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Döner a la Turka',         preis: null, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Yufka Döner',              preis: null, bildUrl: '' },
+  { kategorie: 'Döner & Kebab', gericht: 'Veganer Dürüm (Halloumi)', preis: null, bildUrl: '' },
   // Falafel
-  { kategorie: 'Falafel',       gericht: 'Falafel im Brot',          preis: 100, bildUrl: '' },
-  { kategorie: 'Falafel',       gericht: 'Falafel Dürüm',            preis: 100, bildUrl: '' },
-  { kategorie: 'Falafel',       gericht: 'Falafel Teller',           preis: 100, bildUrl: '' },
+  { kategorie: 'Falafel',       gericht: 'Falafel im Brot',          preis: null, bildUrl: '' },
+  { kategorie: 'Falafel',       gericht: 'Falafel Dürüm',            preis: null, bildUrl: '' },
+  { kategorie: 'Falafel',       gericht: 'Falafel Teller',           preis: null, bildUrl: '' },
   // Pizza
-  { kategorie: 'Pizza',         gericht: 'Pizza Margherita',         preis: 100, bildUrl: '' },
-  { kategorie: 'Pizza',         gericht: 'Pizza Funghi',             preis: 100, bildUrl: '' },
-  { kategorie: 'Pizza',         gericht: 'Pizza Salami',             preis: 100, bildUrl: '' },
-  { kategorie: 'Pizza',         gericht: 'Pizza Döner',              preis: 100, bildUrl: '' },
+  { kategorie: 'Pizza',         gericht: 'Pizza Margherita',         preis: null, bildUrl: '' },
+  { kategorie: 'Pizza',         gericht: 'Pizza Funghi',             preis: null, bildUrl: '' },
+  { kategorie: 'Pizza',         gericht: 'Pizza Salami',             preis: null, bildUrl: '' },
+  { kategorie: 'Pizza',         gericht: 'Pizza Döner',              preis: null, bildUrl: '' },
   // Salate
-  { kategorie: 'Salate',        gericht: 'Thunfischsalat',           preis: 100, bildUrl: '' },
-  { kategorie: 'Salate',        gericht: 'Gemischter Salat',         preis: 100, bildUrl: 'https://res.cloudinary.com/tkwy-prod-eu/image/upload/c_thumb,w_2200,h_480/f_auto/q_auto/dpr_1.0/d_de:cuisines:italienische-pizza-3.jpg/v1/static-takeaway-com/images/generic/heroes/271/271_italian_pizza_163' },
+  { kategorie: 'Salate',        gericht: 'Thunfischsalat',           preis: null, bildUrl: '' },
+  { kategorie: 'Salate',        gericht: 'Gemischter Salat',         preis: null, bildUrl: 'https://res.cloudinary.com/tkwy-prod-eu/image/upload/c_thumb,w_2200,h_480/f_auto/q_auto/dpr_1.0/d_de:cuisines:italienische-pizza-3.jpg/v1/static-takeaway-com/images/generic/heroes/271/271_italian_pizza_163' },
   // Getränke
-  { kategorie: 'Getränke',      gericht: 'Cola 0,33 l',              preis: 100, bildUrl: '' },
-  { kategorie: 'Getränke',      gericht: 'Wasser 0,5 l',             preis: 100, bildUrl: '' },
-  { kategorie: 'Getränke',      gericht: 'Ayran',                    preis: 100, bildUrl: '' },
+  { kategorie: 'Getränke',      gericht: 'Cola 0,33 l',              preis: null, bildUrl: '' },
+  { kategorie: 'Getränke',      gericht: 'Wasser 0,5 l',             preis: null, bildUrl: '' },
+  { kategorie: 'Getränke',      gericht: 'Ayran',                    preis: null, bildUrl: '' },
 ];
 
 /**
  * Emoji placeholder per category (shown when no image URL)
  */
 const CATEGORY_EMOJI = {
-  'döner & kebab': '🥙',
-  'falafel':       '🧆',
-  'pizza':         '🍕',
-  'salate':        '🥗',
-  'getränke':      '🥤',
+  'kebab gerichte': '🥙',
   'kebab':         '🥙',
+  'falafel':       '🧆',
+  'lahmacun':      '🫓',
+  'pizza':         '🍕',
+  'pizzen':         '🍕',
+  'vegetarische gerichte':        '🥗',
+  'getränke':      '🥤',
+  'alkoholische getränke':      '🍺',
+  'alkoholfreie getränke':      '🥤',
+  'salate':         '🥗',
   'salat':         '🥗',
   'default':       '🍽️',
+  'teig gerichte ': '🥟',
+
 };
 
 /**
@@ -327,19 +334,11 @@ function initParticles() {
  */
 function parseTimeStr(val) {
   const str = String(val ?? '').trim();
-  if (!str) return NaN;
-  // "HH:MM", "HH:MM:SS", "H:MM AM/PM" – covers both plain text and gviz formatted times
-  const m = str.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?$/i);
-  if (m) {
-    let h = parseInt(m[1], 10);
-    const mins = parseInt(m[2], 10);
-    const ampm = m[3]?.toUpperCase();
-    if (ampm === 'PM' && h !== 12) h += 12;
-    if (ampm === 'AM' && h === 12) h = 0;
-    return h + mins / 60;
+  if (str.includes(':')) {
+    const [hPart, mPart] = str.split(':');
+    return parseInt(hPart, 10) + parseInt(mPart, 10) / 60;
   }
-  const n = parseFloat(str);
-  return isNaN(n) ? NaN : n;
+  return parseFloat(str) || 0;
 }
 
 /**
@@ -355,14 +354,31 @@ function fmtHour(h) {
 }
 
 async function initHoursStatus() {
-  let openingHours = FALLBACK_OPENING_HOURS;
+  let openingHours;
+  let fetchFailed = false;
   try {
     openingHours = await fetchOpeningHoursFromSheets();
   } catch (err) {
-    console.warn('Opening hours could not be loaded from sheet, using fallback.', err);
+    console.warn('Opening hours could not be loaded from sheet.', err);
+    fetchFailed = true;
   }
-  renderHoursTable(openingHours);
-  renderHoursStatus(openingHours);
+
+  if (fetchFailed) {
+    // Clear the static fallback rows and show a warning
+    const tbody = document.getElementById('hoursTableBody');
+    if (tbody) tbody.innerHTML = '';
+    const warning = document.getElementById('hoursWarning');
+    if (warning) warning.classList.remove('hidden');
+    // Show fallback message in Kontakt section
+    const todayEl = document.getElementById('todayHours');
+    if (todayEl) {
+      todayEl.textContent = 'Bitte ruf uns an für aktuelle Öffnungszeiten.';
+      todayEl.style.color = 'var(--text-muted)';
+    }
+  } else {
+    renderHoursTable(openingHours);
+    renderHoursStatus(openingHours);
+  }
 }
 
 /**
@@ -392,9 +408,8 @@ async function fetchOpeningHoursFromSheets() {
       const dayIndex = DAY_ABBR_TO_INDEX[dayStr];
       if (dayIndex === undefined) return;
 
-      const open  = parseTimeStr(row.c[1]?.f ?? row.c[1]?.v);
-      let   close = parseTimeStr(row.c[2]?.f ?? row.c[2]?.v);
-      if (isNaN(open) || isNaN(close)) return;
+      const open  = parseTimeStr(row.c[1]?.v ?? 0);
+      let   close = parseTimeStr(row.c[2]?.v ?? 0);
       // Wrap-around: e.g., open=10:00, close=03:00 → close becomes 27
       if (close < open) close += 24;
 
@@ -472,7 +487,7 @@ function renderHoursStatus(openingHours) {
   if (todayEl) {
     const slotsText = slots.length > 0
       ? slots.map(([o, c]) => `${fmtHour(o)} – ${fmtHour(c)} Uhr`).join(', ')
-      : 'Heute geschlossen';
+      : 'Aktuell geschlossen';
     todayEl.textContent = `${slotsText} (${isOpen ? 'geöffnet' : 'geschlossen'})`;
     todayEl.style.color = isOpen ? '#4ecdc4' : 'var(--primary)';
   }
@@ -494,10 +509,10 @@ function initFooterHours() {
   const groups   = [];
   let i = 0;
   while (i < dayOrder.length) {
-    const [open, close] = FALLBACK_OPENING_HOURS[dayOrder[i]] || [10, 25];
+    const [open, close] = OPENING_HOURS[dayOrder[i]] || [10, 25];
     let j = i + 1;
     while (j < dayOrder.length) {
-      const [o2, c2] = FALLBACK_OPENING_HOURS[dayOrder[j]] || [10, 25];
+      const [o2, c2] = OPENING_HOURS[dayOrder[j]] || [10, 25];
       if (o2 === open && c2 === close) j++;
       else break;
     }
